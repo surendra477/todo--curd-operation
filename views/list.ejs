@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function alerts(val){
+        
+            document.getElementById("hd"+val).style.display = "none"
+let inputtext = document.createElement("div");
+inputtext.innerHTML ="<input type='text' name='username' id='newInputBox'><button onclick=`shw(val)`>update data</button>";
+document.getElementById("newElementId"+val).appendChild(inputtext);
+        }
+
+        function shw(val){
+            document.getElementById("hd"+val).style.display="inline"
+        }
+    </script>
+</head>
+<body>
+
+    <form action="/list" method="post">
+        <input type="text" name="username">
+        <button>submit</button>
+    </form>
+    
+</body>
+
+<ul>
+    <% str.forEach(function(val){ %>
+        <li style="margin-top: 30px;margin-bottom: 50px;"> <%= val.username %> 
+            <form method="post" style="display: inline;" action="/delete/<%= val._id %>?_method=delete">
+                <button id="del<%= val._id %>" style="display: inline;">Delete</button>
+            </form>
+            <form method="post" style="display: inline;" id="newElementId<%= val._id %>" action="/update/<%= val._id %>?_method=put">
+             
+            </form>
+            <button onclick="alerts('<%= val._id %>')" id="hd<%= val._id %>" style="display: inline;">update</button>
+            </li>
+       
+        <% }) %>
+</ul>
+</html>
+
